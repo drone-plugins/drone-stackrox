@@ -55,7 +55,6 @@ func main() {
 }
 
 func run(c *cli.Context) error {
-	stdlog.Printf("main %s", c.String("stackrox.action"))
 	plugin := Plugin{
 		Action: c.String("action"),
 		Url:    c.String("rox_central_address"),
