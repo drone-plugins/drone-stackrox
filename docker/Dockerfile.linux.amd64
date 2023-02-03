@@ -1,0 +1,6 @@
+FROM scratch
+
+ADD release/linux/amd64/roxctl /bin/
+ADD release/linux/amd64/drone-stackrox /bin/
+ENTRYPOINT ["/bin/drone-stackrox"]
+
