@@ -8,11 +8,12 @@ import (
 
 type (
 	Plugin struct {
-		Action string
-		Url    string
-		Image  string
-		Token  string
-		Output string
+		Action     string
+		Url        string
+		Image      string
+		Token      string
+		Output     string
+		OutputFile string
 	}
 )
 
@@ -24,6 +25,12 @@ func (p *Plugin) Exec() error {
 	if err != nil {
 		stdlog.Println(err)
 		return err
+	}
+	if p.OutputFile != "" {
+		err = os.WriteFile(p.OutputFile, out, 0644)
+		if err != nil {
+			return err
+		}
 	}
 	stdlog.Println(string(out))
 	return nil

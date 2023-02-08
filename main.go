@@ -47,6 +47,12 @@ func main() {
 			Value:  "json",
 			EnvVar: "PLUGIN_OUTPUT",
 		},
+		cli.StringFlag{
+			Name:   "output-file",
+			Usage:  "scan result output",
+			Value:  "json",
+			EnvVar: "PLUGIN_OUTPUT_FILE_DIR",
+		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
@@ -56,11 +62,12 @@ func main() {
 
 func run(c *cli.Context) error {
 	plugin := Plugin{
-		Action: c.String("action"),
-		Url:    c.String("rox_central_address"),
-		Image:  c.String("image"),
-		Token:  c.String("token"),
-		Output: c.String("output"),
+		Action:     c.String("action"),
+		Url:        c.String("rox_central_address"),
+		Image:      c.String("image"),
+		Token:      c.String("token"),
+		Output:     c.String("output"),
+		OutputFile: c.String("output-file"),
 	}
 	return plugin.Exec()
 }
