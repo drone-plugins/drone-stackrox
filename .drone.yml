@@ -38,3 +38,31 @@ trigger:
     - refs/heads/main
     - refs/tags/**
     - refs/pull/**
+
+---
+kind: pipeline
+type: vm
+name: manifest
+platform:
+  os: linux
+  arch: amd64
+pool:
+  use: ubuntu
+
+steps:
+  - name: manifest
+    image: plugins/manifest:linux-amd64
+    settings:
+      auto_tag: "true"
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      spec: docker/manifest.tmpl
+      ignore_missing: true
+depends_on:
+  - linux-amd64
+trigger:
+  ref:
+    - refs/heads/master
+    - refs/tags/**
