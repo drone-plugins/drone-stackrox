@@ -50,7 +50,6 @@ func main() {
 		cli.StringFlag{
 			Name:   "output-file",
 			Usage:  "scan result output",
-			Value:  "json",
 			EnvVar: "PLUGIN_OUTPUT_FILE_DIR",
 		},
 		cli.StringFlag{
