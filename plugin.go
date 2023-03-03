@@ -14,12 +14,16 @@ type (
 		Token      string
 		Output     string
 		OutputFile string
+		Categories string
 	}
 )
 
 func (p *Plugin) Exec() error {
 	os.Setenv("ROX_API_TOKEN", p.Token)
 	args := []string{"image", p.Action, "-e", p.Url, "--image", p.Image, "-o", p.Output}
+	if p.Categories != "" {
+		args = append(args, "--categories", p.Categories)
+	}
 	cmd := exec.Command("roxctl", args...)
 	out, err := cmd.Output()
 	if err != nil {

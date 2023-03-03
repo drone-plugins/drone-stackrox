@@ -53,6 +53,11 @@ func main() {
 			Value:  "json",
 			EnvVar: "PLUGIN_OUTPUT_FILE_DIR",
 		},
+		cli.StringFlag{
+			Name:   "categories",
+			Usage:  "image check categories",
+			EnvVar: "PLUGIN_CATEGORIES",
+		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
@@ -68,6 +73,7 @@ func run(c *cli.Context) error {
 		Token:      c.String("token"),
 		Output:     c.String("output"),
 		OutputFile: c.String("output-file"),
+		Categories: c.String("categories"),
 	}
 	return plugin.Exec()
 }
